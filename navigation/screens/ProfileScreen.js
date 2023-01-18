@@ -94,16 +94,32 @@ export default function ContactListScreen(name) {
     const deleteContact = () => {
       setFavorites(favorites.filter((favorite) => favorite.id !== item.id));
     };
-
     const sendSMSWithLocation = async (phoneNumber) => {
       try {
         // Skaffer brugerens nuværende lokation
         const location = await Location.getCurrentPositionAsync({});
-
+        // Make a call to the Google Maps Geocoding API
+        const apiKey = "YOUR_API_KEY";
+        let response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=${apiKey}`
+        );
+        let responseJson = await response.json();
+        let address;
+        if (
+          responseJson.results &&
+          responseJson.results.length > 0 &&
+          responseJson.results[0].formatted_address
+        ) {
+          address = responseJson.results[0].formatted_address;
+        } else {
+          address = `${location.coords.latitude},${location.coords.longitude}`;
+        }
+        // Construct the Google Maps URL
+        let mapsUrl = `https://maps.google.com/?q=${address}`;
         // Send en sms med lokation og tekst besked
         await SMS.sendSMSAsync(
           [phoneNumber],
-          `${item.name} prøv at kontakt mig hurtigst muligt jeg er i fare her er min lokation: https://www.google.com/maps/search/?api=1&query=${location.coords.latitude},${location.coords.longitude}`
+          `${item.name} prøv at kontakt mig hurtigst muligt jeg er i fare her er min lokation: ${mapsUrl}`
         );
       } catch (error) {
         console.error(error);

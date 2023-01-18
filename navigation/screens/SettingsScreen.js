@@ -32,6 +32,7 @@ export default function SettingsScreen() {
       { cancelable: false }
     );
   };
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text style={styles.titleText}>Tilladelser</Text>
@@ -79,7 +80,11 @@ export default function SettingsScreen() {
 
       {/* Log ud funktion */}
 
-      <TouchableOpacity onPress={() => firebase.auth().signOut()}>
+      <TouchableOpacity
+        onPress={() => {
+          firebase.auth().signOut();
+        }}
+      >
         <Text style={styles.Text}>log ud</Text>
       </TouchableOpacity>
     </View>
