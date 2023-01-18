@@ -134,13 +134,13 @@ export default function ContactListScreen(name) {
         </TouchableOpacity>
         {isFavorite && (
           <>
-            <TouchableOpacity onPress={deleteContact}>
-              <Ionicons name="person-remove-outline" size={42} color="green" />
-            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => sendSMSWithLocation(item.phoneNumbers[0].number)}
             >
-              <Ionicons name="send-outline" size={42} color="green" />
+              <Text>Send lokation</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={deleteContact}>
+              <Text style={styles.deleteButton}>Slet kontakt</Text>
             </TouchableOpacity>
           </>
         )}
@@ -274,6 +274,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   deleteButton: {
+    marginTop: 12.5,
     color: "red",
   },
   profileContainer: {
