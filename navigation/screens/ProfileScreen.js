@@ -94,12 +94,13 @@ export default function ContactListScreen(name) {
     const deleteContact = () => {
       setFavorites(favorites.filter((favorite) => favorite.id !== item.id));
     };
+
     const sendSMSWithLocation = async (phoneNumber) => {
       try {
         // Skaffer brugerens nuværende lokation
         const location = await Location.getCurrentPositionAsync({});
         // Make a call to the Google Maps Geocoding API
-        const apiKey = "YOUR_API_KEY";
+        const apiKey = "AIzaSyDlVtU6gQkE3f8FsFAxkaWbw9bgzjBrNUM";
         let response = await fetch(
           `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=${apiKey}`
         );
@@ -215,7 +216,7 @@ export default function ContactListScreen(name) {
           renderSectionHeader={renderSectionHeader}
         />
       ) : (
-        <Text style={styles.noContactsText}>No contacts found.</Text>
+        <Text style={styles.noContactsText}>Ingen kontakter fundet.</Text>
       )}
       {favorites.length > 0 && (
         <FlatList
