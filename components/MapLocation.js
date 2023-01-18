@@ -89,7 +89,7 @@ export default function MapLocation() {
         </View>
       </Modal>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        {/*        <TouchableOpacity
           style={styles.button}
           onPress={() => {
             setShowModal(!showModal);
@@ -112,7 +112,7 @@ export default function MapLocation() {
           >
             Fav
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity style={styles.button} onPress={zoomToMarker}>
           <Ionicons
             name="ios-locate"
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    bottom: 220,
+    bottom: 170,
     padding: 4,
     left: 10,
     width: 0,
